@@ -1,47 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import {connect} from "react-redux";
 import {ACTION_TYPES, isWinnerSelector} from "./store";
+import RenderField from "./RenderField";
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
-    renderField() {
-        const result = [];
-        for(let i = 0; i < 9; i++){
-            result.push(
-                <div className="ttt-grid" onClick={() => this.props.onClick(i)} data={i} data-testid={'Sq' + i}>
-                    {this.props.squares[i]}
-                </div>
-            );
-        }
-        return result;
-    }
-
-    render() {
-        if (this.props.isWinner) {
-            alert(this.props.isWinner + ' win');
+function App (props) {
+    const Win = props.isWinner;
+    if (Win) {
+            alert(Win + ' win');
             setTimeout(()=>{
-                this.props.startNew();
+                props.startNew();
             },2000);
         }
 
         return (
-            <div className="tic-tac-toe">
-                {this.renderField()}
-            </div>
+            <>
+                <RenderField  />
+            </>
         );
-    }
+
 }
 
 function mapStateToProps(state) {
     return {
         squares: state.squares,
         count: state.count,
-        isWinner: isWinnerSelector(state)
+        isWinner: isWinnerSelector(state),
+        win_o: state.win_o,
+        win_y: state.win_y
     }
 }
 

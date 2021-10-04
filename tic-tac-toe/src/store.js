@@ -1,11 +1,16 @@
 export const ACTION_TYPES = {
     START_NEW: 'start_new',
-    TURN: 'turn'
+    TURN: 'turn',
+    INCREMENT_X: 'inc_x',
+    INCREMENT_O: 'inc_o',
+    DRAW: 'draw'
 }
 
-const initialState = {
+export const initialState = {
     squares: Array(9).fill(null),
-    count: 0
+    count: 0,
+    win_x: 0,
+    win_o: 0
 }
 
 const winnerLine = [
@@ -35,6 +40,17 @@ export default function reducer (state = initialState, action) {
                 squares:currentSquare
             };
         }
+        case ACTION_TYPES.INCREMENT_O: {
+            let currentCountO = [state.win_o];
+            return currentCountO+1
+        }
+        case ACTION_TYPES.INCREMENT_X: {
+            let currentCountX = [state.win_x];
+            return currentCountX+1
+        }
+        case ACTION_TYPES.DRAW: {
+            return [...state]
+        }
         default:
             return state;
     }
@@ -52,3 +68,4 @@ export const isWinnerSelector = (state) => {
     }
     return;
 }
+
