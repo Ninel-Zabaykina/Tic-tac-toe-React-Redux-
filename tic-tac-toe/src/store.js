@@ -35,10 +35,7 @@ export default function reducer (state = initialState, action) {
             if (currentSquare[action.payload] === null) {
                 currentSquare[action.payload] = (state.count % 2 === 0) ? 'X' : 'O';
             }
-            return {
-                count: state.count + 1,
-                squares:currentSquare
-            };
+            return {...initialState, count: state.count + 1, squares: [...currentSquare]}
         }
         case ACTION_TYPES.INCREMENT_O: {
             let currentCountO = [state.win_o];
@@ -58,13 +55,16 @@ export default function reducer (state = initialState, action) {
 
 export const isWinnerSelector = (state) => {
     let s = (state.count % 2 === 0) ? 'X' : 'O';
+    console.log(state, s);
     for (let i = 0; i<8; i++) {
         let line = winnerLine[i];
+        console.log(state.squares[line[0]]);
         if (state.squares[line[0]] === s
-            &&state.squares[line[1]] === s
-            && state.squares[line[2]] === s){
-            return s;
-        }
+            && state.squares[line[1]] === s
+            && state.squares[line[2]] === s)
+        {
+        return s;
+    }
     }
     return;
 }

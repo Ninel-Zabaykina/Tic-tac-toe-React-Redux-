@@ -1,23 +1,42 @@
 import React from 'react';
 import './App.css';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {ACTION_TYPES, isWinnerSelector} from "./store";
-import RenderField from "./RenderField";
+import Field from "./Field";
 
-function App (props) {
-    const Win = props.isWinner;
-    if (Win) {
-            alert(Win + ' win');
-            setTimeout(()=>{
-                props.startNew();
-            },2000);
-        }
+function App(props) {
+    const dispatch = useDispatch();
+    const win = props.isWinner;
+    console.log(win);
+    if (win) {
+        alert(win + ' win');
+        dispatch()
+        setTimeout(() => {
+            startNew();
+        }, 2000);
+    }
 
-        return (
-            <>
-                <RenderField  />
-            </>
-        );
+    function onClick(id) {
+        dispatch({type: ACTION_TYPES.TURN, payload: id});
+    }
+
+    function startNew() {
+        dispatch({type: ACTION_TYPES.START_NEW});
+    }
+
+    function winX() {
+        dispatch({type: ACTION_TYPES.INCREMENT_X});
+    }
+
+    function winO() {
+        dispatch({type: ACTION_TYPES.INCREMENT_O});
+    }
+
+    return (
+        <>
+            <Field OnClick={onClick}/>
+        </>
+    );
 
 }
 
@@ -31,11 +50,5 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        onClick: (id) => dispatch({type: ACTION_TYPES.TURN, payload: id}),
-        startNew: () => dispatch({type: ACTION_TYPES.START_NEW})
-    }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
