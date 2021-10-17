@@ -28,22 +28,24 @@ export default function reducer (state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPES.START_NEW:
         {
-            return {...initialState};
+            return {...initialState, win_o: state.win_o, win_x: state.win_x};
         }
         case ACTION_TYPES.TURN: {
             let currentSquare = [...state.squares];
             if (currentSquare[action.payload] === null) {
                 currentSquare[action.payload] = (state.count % 2 === 0) ? 'X' : 'O';
             }
-            return {...initialState, count: state.count + 1, squares: [...currentSquare]}
+            return {...initialState, count: state.count + 1, squares: [...currentSquare], win_o: state.win_o, win_x: state.win_x}
         }
         case ACTION_TYPES.INCREMENT_O: {
-            let currentCountO = [state.win_o];
-            return currentCountO+1
+            // let currentCountO = [state.win_o];
+            // return {win_o:[currentCountO], count: state.win_o + 1}
+            return {...initialState, win_o: state.win_o + 0.5, win_x: state.win_x}
         }
         case ACTION_TYPES.INCREMENT_X: {
-            let currentCountX = [state.win_x];
-            return currentCountX+1
+            // let currentCountX = [state.win_x];
+            // return {win_x:[currentCountX], count: state.win_x + 1}
+            return {...initialState, win_x: state.win_x + 0.5, win_o: state.win_o}
         }
         case ACTION_TYPES.DRAW: {
             return [...state]

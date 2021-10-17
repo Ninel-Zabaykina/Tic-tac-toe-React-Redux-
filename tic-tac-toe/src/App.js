@@ -3,10 +3,11 @@ import './App.css';
 import {connect, useDispatch} from "react-redux";
 import {ACTION_TYPES, isWinnerSelector} from "./store";
 import Field from "./Field";
+import CountWin from "./CountWin";
 
 function App(props) {
     const dispatch = useDispatch();
-    const win = props.isWinner
+    const win = props.isWinner;
     if (win) {
         document.getElementById('msg').textContent = win + ' not Looser';
         document.getElementById('msg').style.display = 'block';
@@ -16,6 +17,12 @@ function App(props) {
         setTimeout(() => {
             startNew();
         }, 2000);
+
+        if (win === 'X'){
+            winX();
+        }else {
+            winO();
+        }
     }
 
     function onClick(id) {
@@ -37,6 +44,7 @@ function App(props) {
     return (
         <>
             <Field OnClick={onClick}/>
+            <CountWin />
         </>
     );
 
