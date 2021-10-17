@@ -10,7 +10,11 @@ export default function Field(props) {
                 {squares[i]}
             </div>
         );
-}
+        if (i % 3 === 2){
+            result.push(<div className="clearfix"></div>);
+        }
+    }
+    result.push(<div className="message" id="msg">&nbsp;LOOsER!</div>);
     return result;
 }
 

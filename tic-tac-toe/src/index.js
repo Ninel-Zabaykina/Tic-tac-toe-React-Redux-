@@ -12,7 +12,9 @@ const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+        <div className="tic-tac-toe">
+            <App />
+        </div>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

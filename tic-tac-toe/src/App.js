@@ -6,11 +6,13 @@ import Field from "./Field";
 
 function App(props) {
     const dispatch = useDispatch();
-    const win = props.isWinner;
-    console.log(win);
+    const win = props.isWinner
     if (win) {
-        alert(win + ' win');
-        dispatch()
+        document.getElementById('msg').textContent = win + ' not Looser';
+        document.getElementById('msg').style.display = 'block';
+        setTimeout(function(){
+            document.getElementById('msg').style.display = 'none';
+        }, 3000);
         setTimeout(() => {
             startNew();
         }, 2000);
@@ -51,4 +53,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
