@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import './App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {ACTION_TYPES, isWinnerSelector} from "./store";
-import Field from "./Field";
-import CountWin from "./CountWin";
-import WhoIsWinner from "./WhoIsWinner";
+import Field from "./components/Field";
+import CountWin from "./components/CountWin";
 
 function App() {
     const dispatch = useDispatch();
@@ -16,13 +15,13 @@ function App() {
                 startNew();
             }, 2000);
         }
-    })
-
         if (win === 'X'){
             winX();
-        } else {
+        } else if (win === 'O') {
             winO();
         }
+    }, [win]);
+
 
     function onClick(id) {
         dispatch({type: ACTION_TYPES.TURN, payload: id});
