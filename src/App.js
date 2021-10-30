@@ -23,9 +23,7 @@ function App() {
     }, [win]);
 
 
-    function onClick(id) {
-        dispatch({type: ACTION_TYPES.TURN, payload: id});
-    }
+
 
     function startNew() {
         dispatch({type: ACTION_TYPES.START_NEW});
@@ -41,7 +39,7 @@ function App() {
 
     return (
         <>
-            <Field OnClick={onClick}/>
+            <Field />
             <CountWin />
         </>
     );

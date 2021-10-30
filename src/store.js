@@ -1,3 +1,5 @@
+
+
 export const ACTION_TYPES = {
     START_NEW: 'start_new',
     TURN: 'turn',
@@ -26,7 +28,7 @@ const winnerLine = [
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPES.START_NEW: {
-            return {...initialState};
+            return {...initialState, win_o: state.win_o, win_x: state.win_x};
         }
         case ACTION_TYPES.TURN: {
             let currentSquare = [...state.squares];
